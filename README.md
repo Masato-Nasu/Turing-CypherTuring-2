@@ -14,8 +14,6 @@ This version is based on **AP61.7 / 2-page-priority dense labyrinth**.
   <img src="./screenshot1.png" alt="Turing Cypher 2 screenshot" width="720">
 </p>
 
-> Note: `screenshot1.png` is intentionally referenced here. Add `screenshot1.png` to the repository root later.
-
 ## Demo / Live App
 
 - Cloudflare Pages: `https://turing-cypher-2.pages.dev/`
