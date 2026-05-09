@@ -9,7 +9,6 @@ This version is based on **AP61.7 / 2-page-priority dense labyrinth**.
 
 ## Screenshot
 
-A screenshot will be added later.
 
 <p align="center">
   <img src="./screenshot1.png" alt="Turing Cypher 2 screenshot" width="720">
