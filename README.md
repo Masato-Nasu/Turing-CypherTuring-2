@@ -5,8 +5,6 @@
 It turns text, URLs, files, and images into one or more Gray-Scott / reaction-diffusion style labyrinth PNG files.  
 The original PNG file itself acts as the container. With the same passphrase, the encoded content can be restored.
 
-This version is based on **AP61.7 / 2-page-priority dense labyrinth**.
-
 ## Screenshot
 
 
