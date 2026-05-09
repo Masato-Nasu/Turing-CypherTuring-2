@@ -99,53 +99,6 @@ Image optimization options:
 
 When optimized, the recovered image is the optimized image, not necessarily the original file.
 
-## Deployment
-
-From this folder:
-
-```powershell
-npx wrangler pages deploy . --project-name turing-cypher-2
-```
-
-From Downloads after unzipping:
-
-```powershell
-cd "$env:USERPROFILE\Downloads\turing-cypher-2-github"
-
-npx wrangler pages deploy . --project-name turing-cypher-2
-```
-
-If the project does not exist yet, choose:
-
-```text
-Create a new project
-production branch: main
-```
-
-## Files
-
-```text
-index.html
-app.js
-style.css
-manifest.webmanifest
-sw.js
-_headers
-_redirects
-README.md
-AP61_AUDIT.md
-```
-
-## Notes for GitHub
-
-After adding the screenshot, place it here:
-
-```text
-screenshot1.png
-```
-
-The README already references `screenshot1.png`.
-
 ## Tags
 
 ```text
