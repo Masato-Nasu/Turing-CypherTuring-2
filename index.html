@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Turing Cypher AP61.5</title>
+  <meta name="theme-color" content="#090908" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <div class="hero-row">
+        <h1 data-i18n="appTitle">Turing Cypher</h1>
+        <div class="lang-switch" aria-label="Language">
+          <button id="langJa" class="lang active" type="button">日本語</button>
+          <button id="langEn" class="lang" type="button">EN</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <div class="kicker">1</div>
+          <h2 data-i18n="makeTitle">有機PNGを作る</h2>
+        </div>
+      </div>
+
+      <label class="field-label" data-i18n="payloadType">データの種類</label>
+      <div class="segmented" role="tablist" aria-label="Payload type">
+        <button class="seg active" data-mode="text" data-i18n="modeText" type="button">テキスト</button>
+        <button class="seg" data-mode="url" data-i18n="modeUrl" type="button">URL</button>
+        <button class="seg" data-mode="file" data-i18n="modeFile" type="button">ファイル / 画像 + 文字</button>
+      </div>
+
+      <div id="textBox" class="mode-box">
+        <label class="field-label" for="plainText" data-i18n="textToEncrypt">暗号化する文字</label>
+        <textarea id="plainText" rows="5" data-i18n-placeholder="textPlaceholder" placeholder="短いメモ / テキスト"></textarea>
+      </div>
+
+      <div id="urlBox" class="mode-box hidden">
+        <label class="field-label" for="urlText" data-i18n="urlToEncrypt">暗号化するURL</label>
+        <input id="urlText" type="url" placeholder="https://example.com/" />
+      </div>
+
+      <div id="fileBox" class="mode-box hidden">
+        <label class="field-label" for="filePayload" data-i18n="fileToEncrypt">暗号化するファイル</label>
+        <input id="filePayload" type="file" accept="*/*" />
+        <label class="field-label" for="imageOptimize" data-i18n="imageOptimizeLabel">画像最適化</label>
+        <select id="imageOptimize">
+          <option value="onepage" selected data-i18n="imageOptimizeOnePage">1ページ優先</option>
+          <option value="small" data-i18n="imageOptimizeSmall">小さく圧縮</option>
+          <option value="balanced" data-i18n="imageOptimizeBalanced">バランス</option>
+          <option value="high" data-i18n="imageOptimizeHigh">高画質</option>
+          <option value="original" data-i18n="imageOptimizeOriginal">元ファイルのまま</option>
+        </select>
+        <p class="note" data-i18n="imageOptimizeNote">画像ファイルのみ。最適化時は、元画像・PNG・JPEG・WebPから小さいものを自動選択します。</p>
+        <label class="field-label" for="fileNote" data-i18n="fileNoteLabel">一緒に入れる文字（任意）</label>
+        <textarea id="fileNote" rows="4" data-i18n-placeholder="fileNotePlaceholder" placeholder="画像やファイルと一緒に復号したい文字"></textarea>
+      </div>
+
+      <div class="grid two">
+        <div>
+          <label class="field-label" for="makePass" data-i18n="passphrase">合い言葉</label>
+          <input id="makePass" type="password" autocomplete="off" data-i18n-placeholder="makePassPlaceholder" placeholder="復号にも同じ合い言葉を使います" />
+        </div>
+        <div>
+          <label class="field-label" for="pageSize" data-i18n="pageSize">有機ページサイズ</label>
+          <select id="pageSize">
+            <option value="auto" selected data-i18n="sizeAuto">自動</option>
+            <option value="384">384 × 384</option>
+            <option value="512">512 × 512</option>
+            <option value="768">768 × 768</option>
+            <option value="1024">1024 × 1024</option>
+            <option value="1536">1536 × 1536</option>
+            <option value="2048">2048 × 2048</option>
+            <option value="3072">3072 × 3072</option>
+            <option value="4096">4096 × 4096</option>
+            <option value="6144">6144 × 6144 experimental</option>
+            <option value="7168">7168 × 7168 experimental</option>
+            <option value="8192">8192 × 8192 experimental</option>
+            <option value="9216">9216 × 9216 experimental</option>
+            <option value="10240">10240 × 10240 experimental</option>
+            <option value="12288">12288 × 12288 experimental</option>
+          </select>
+        </div>
+      </div>
+
+      <button id="makeBtn" class="primary" data-i18n="makeButton" type="button">有機PNGを作る</button>
+      <div id="makeStatus" class="status" aria-live="polite"></div>
+    </section>
+
+    <section id="outputPanel" class="panel hidden">
+      <div class="section-head">
+        <div>
+          <div class="kicker">PNG</div>
+          <h2 data-i18n="generatedTitle">生成されたページ</h2>
+        </div>
+        <div id="pageSummary" class="badge"></div>
+      </div>
+      <div id="previewWrap" class="preview-wrap"></div>
+      <div class="actions">
+        <button id="downloadAllBtn" type="button" class="secondary" data-i18n="saveAll">すべて保存（ZIP）</button>
+        <button id="selfCheckBtn" type="button" class="ghost" data-i18n="selfCheck">セルフチェック</button>
+        <button id="clearBtn" type="button" class="ghost" data-i18n="clear">クリア</button>
+      </div>
+      <div id="pageList" class="page-list"></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <div class="kicker">2</div>
+          <h2 data-i18n="readTitle">PNGから読み出す</h2>
+        </div>
+      </div>
+      <label class="field-label" for="readFiles" data-i18n="organicPages">有機PNGページ</label>
+      <input id="readFiles" type="file" accept="image/png" multiple />
+      <label class="field-label" for="readPass" data-i18n="passphrase">合い言葉</label>
+      <input id="readPass" type="password" autocomplete="off" data-i18n-placeholder="readPassPlaceholder" placeholder="作成時と同じ合い言葉" />
+      <button id="readBtn" class="primary" data-i18n="readButton" type="button">読み出す</button>
+      <div id="readStatus" class="status" aria-live="polite"></div>
+      <div id="readResult" class="result hidden"></div>
+    </section>
+
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>
